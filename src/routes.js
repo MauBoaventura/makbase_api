@@ -1,24 +1,33 @@
 const express = require('express')
 const routes = express.Router()
 
-// const RunnerController = require('./controllers/RunnerController')
+const SellerController = require('./controllers/SellerController')
+const ClientController = require('./controllers/ClientController')
+const ProductController = require('./controllers/ProductController')
 // const StageController = require('./controllers/StageController')
 // const RaceController = require('./controllers/RaceController')
 // const MileageController = require('./controllers/MileageController')
 
-// // Corredores
-// routes.get('/corredor', RunnerController.index)
-// routes.get('/corredor/:id', RunnerController.get)
-// routes.post('/corredor', RunnerController.create)
-// routes.put('/corredor/:id', RunnerController.update)
-// routes.delete('/corredor/:id', RunnerController.delete)
+// Vendedores
+routes.get('/vendedores', SellerController.index)
+routes.get('/vendedores/:cpf_cnpj', SellerController.get)
+routes.post('/vendedores', SellerController.post)
+routes.put('/vendedores/:cpf_cnpj', SellerController.update)
+routes.delete('/vendedores/:cpf_cnpj', SellerController.delete)
 
-// // Etapas
-// routes.get('/etapa', StageController.index)
-// routes.get('/etapa/:id', StageController.get)
-// routes.post('/etapa', StageController.create)
-// routes.put('/etapa/:id', StageController.update)
-// routes.delete('/etapa/:id', StageController.delete)
+// Clientes
+routes.get('/cliente', ClientController.index)
+routes.get('/cliente/:cpf_cnpj', ClientController.get)
+routes.post('/cliente', ClientController.post)
+routes.put('/cliente/:cpf_cnpj', ClientController.update)
+routes.delete('/cliente/:cpf_cnpj', ClientController.delete)
+
+// Produtos Cliente
+// routes.get('/produto', ProductController.index)
+routes.get('/produto/:id', ProductController.get)
+routes.post('/produto', ProductController.post)
+routes.put('/produto/:id', ProductController.update)
+routes.delete('/produto/:id', ProductController.delete)
 
 // // Configurações
 // routes.get('/quilometragem', MileageController.get)

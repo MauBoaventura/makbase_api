@@ -17,6 +17,9 @@ exports.up = function (knex, Promise) {
         table.string('description').notNullable();
         table.integer('stock').defaultTo(0);
 
+        table.string('seo_description').notNullable();
+        table.string('seo_name').notNullable();
+
         table.integer('category_id').notNullable().unsigned();
         table.foreign('category_id').references('id').inTable('product_categories')
 
