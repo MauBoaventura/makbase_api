@@ -14,5 +14,5 @@ exports.up = function (knex, Promise) {
 };
 
 exports.down = function (knex, Promise) {
-    return knex.schema.dropTable('images')
+    return knex.schema.dropTable('image_products')
 };

@@ -13,6 +13,5 @@ app.use(routes)
 
 app.listen(3031, () => {
     console.log("Backend rodando");
-    // d = new Date();
-    // console.log("" +d)
+
 })

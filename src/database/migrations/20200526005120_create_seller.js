@@ -2,7 +2,7 @@ exports.up = function (knex, Promise) {
     return knex.schema.createTable('sellers', function (table) {
         // table.increments().primary();
         table.string('cpf_cnpj').notNullable().primary();
-        table.binary('avatar').notNullable();
+        table.binary('avatar');
         table.string('name').notNullable();
         table.string('lastname').notNullable();
         table.string('email').notNullable();

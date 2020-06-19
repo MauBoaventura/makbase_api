@@ -24,6 +24,7 @@ module.exports = {
             return res.status(401).json({
                 error: "Sellers not exist"
             })
+        dados.password = await util.descriptografar(dados.password)
         res.json(dados)
     },
 
@@ -31,14 +32,22 @@ module.exports = {
         const cpf_cnpj = req.body.cpf_cnpj;
 
         //Verifica se o cpf_cnpj já esta sendo utilizado
-        if (util.existe_cpf_cnpj(cpf_cnpj)) {
+        if (await util.existe_cpf_cnpj(cpf_cnpj)) {
             return res.status(401).json({
                 error: "Cpf already used!"
             })
         }
+        try {
+            //Criptografar senha
+            req.body.password = await util.criptografar(req.body.password)
+            //Insere no banco
+            await connection('sellers').insert(req.body)
 
-        //Insere no banco
-        await connection('sellers').insert(req.body)
+        } catch (error) {
+            return res.status(401).json({
+                error: error
+            })
+        }
 
 
         res.status(200).send()
