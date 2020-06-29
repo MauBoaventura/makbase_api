@@ -1,12 +1,26 @@
 const express = require('express')
 const routes = express.Router()
+const passport = require('passport')
 
 const SellerController = require('./controllers/SellerController')
 const ClientController = require('./controllers/ClientController')
 const ProductController = require('./controllers/ProductController')
-// const StageController = require('./controllers/StageController')
+const AutenticaController = require('./controllers/AutenticaController')
 // const RaceController = require('./controllers/RaceController')
 // const MileageController = require('./controllers/MileageController')
+
+//Login e Autenticacao
+routes.get('/google', passport.authenticate('google', {scope: ['https://www.googleapis.com/auth/userinfo.profile','https://www.googleapis.com/auth/userinfo.email']}))
+
+routes.get('/google/callback', passport.authenticate('google', { failureRedirect: '/fail' }),
+    (req, res) => {
+        // Successful authentication, redirect home.
+        res.redirect('/good');
+    })
+
+routes.get('/fail', AutenticaController.fail_login)
+routes.get('/good', AutenticaController.isLoggedIn, AutenticaController.success_login)
+routes.get('/logout', AutenticaController.logout)
 
 // Vendedores
 routes.get('/vendedor', SellerController.index)

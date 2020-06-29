@@ -1,14 +1,13 @@
 // Update with your config settings.
-
 module.exports = {
 
   development: {
     client: 'mysql',
     connection: {
-      host: '127.0.0.1',
-      user: 'root',
-      password: 'password',
-      database: 'markbase',
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASS,
+      database: process.env.DB_NAME,
       timezone: 'utc'
     },
     migrations: {
