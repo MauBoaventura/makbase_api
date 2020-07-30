@@ -3,7 +3,8 @@ const moment = require('moment')
 const connection = require('../database/connection')
 const crypto = require('crypto')
 // const encrypted_Key = "CenH@$uPeRF0RTeCenH@$uPeRF0RTe87"
-   const encrypted_Key = "D1sb456R89A123A5678901P34M6789pA"
+   const encrypted_Key = process.env.SECRET_PASSWORD
+   
 module.exports = {
     async existe_cpf_cnpj(cpf_cnpj) {
         const sellers = await connection('sellers')
