@@ -28,8 +28,8 @@ module.exports = {
     },
     
     gerarJWT(params = {}) {
-        return jwt.sign(params, process.env.SECRET_JWT, {
-            expiresIn: 60
-        })
+        return jwt.sign(params, process.env.SECRET_JWT,{
+          expiresIn:600,  
+        });
     }
 }

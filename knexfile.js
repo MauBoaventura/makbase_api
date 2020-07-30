@@ -4,10 +4,10 @@ module.exports = {
   development: {
     client: 'mysql',
     connection: {
-      host: process.env.DB_HOST,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASS,
-      database: process.env.DB_NAME,
+      host: 'localhost' || process.env.DB_HOST,
+      user: 'root' || process.env.DB_USER,
+      password: 'password' || process.env.DB_PASS,
+      database: 'markbase' || process.env.DB_NAME,
       timezone: 'utc'
     },
     migrations: {

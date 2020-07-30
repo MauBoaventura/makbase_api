@@ -6,10 +6,16 @@ const SellerController = require('./controllers/SellerController')
 const ClientController = require('./controllers/ClientController')
 const ProductController = require('./controllers/ProductController')
 const AutenticaController = require('./controllers/AutenticaController')
+const LoginController = require('./controllers/LoginController')
 // const RaceController = require('./controllers/RaceController')
 // const MileageController = require('./controllers/MileageController')
 
-//Login e Autenticacao
+//Login email
+routes.get('/loginCliente', LoginController.loginCliente)
+routes.get('/loginVendedor', LoginController.loginVendedor)
+
+
+// Autenticacao Google
 routes.get('/google', passport.authenticate('google', {scope: ['https://www.googleapis.com/auth/userinfo.profile','https://www.googleapis.com/auth/userinfo.email']}))
 
 routes.get('/google/callback', passport.authenticate('google', { failureRedirect: '/fail' }),
