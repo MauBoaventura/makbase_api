@@ -1,7 +1,5 @@
 exports.up = function (knex, Promise) {
     return knex.schema.createTable('sellers', function (table) {
-        // table.increments().primary();
-        knex.raw('`id` INT NULL AUTO_INCREMENT);');
         table.string('cpf_cnpj').notNullable().unique();
         table.binary('avatar');
         table.string('name').notNullable();
