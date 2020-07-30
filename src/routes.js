@@ -11,6 +11,9 @@ const LoginController = require('./controllers/LoginController')
 // const MileageController = require('./controllers/MileageController')
 
 //Login email
+routes.get('/', (req, res)=>{
+    res.send("<h1>API MARKBASE ONLINE</h1>")
+})
 routes.get('/loginCliente', LoginController.loginCliente)
 routes.get('/loginVendedor', LoginController.loginVendedor)
 

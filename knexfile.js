@@ -15,36 +15,18 @@ module.exports = {
     }
   },
 
-  staging: {
-    client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user: 'username',
-      password: 'password'
-    },
-    pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      tableName: 'knex_migrations'
-    }
-  },
-
   production: {
-    client: 'postgresql',
+    client: 'mysql',
     connection: {
-      database: 'my_db',
-      user: 'username',
-      password: 'password'
-    },
-    pool: {
-      min: 2,
-      max: 10
+      database: 'heroku_4458bb5d838ce78',
+      host: 'us-cdbr-east-02.cleardb.com',
+      user: 'b9341b93806e07',
+      password: '709fa3ad',
+      timezone: 'utc'
+
     },
     migrations: {
-      tableName: 'knex_migrations'
+      directory: './src/database/migrations'
     }
   },
-
 };
