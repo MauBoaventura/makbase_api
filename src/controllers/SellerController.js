@@ -73,20 +73,34 @@ module.exports = {
 
     async update(req, res) {
         const cpf_cnpj = req.params.cpf_cnpj;
-
+        console.log(cpf_cnpj)
+        
         //Verifica se o cpf_cnpj já esta sendo utilizado
         if (!util.existe_Vendedor_cpf_cnpj(cpf_cnpj)) {
             return res.status(401).json({
                 error: "Seller do not exist!"
             })
         }
+        console.log(cpf_cnpj)
+        
+        //Verifica se o cpf_cnpj novo já esta sendo utilizado
+        if (util.existe_Vendedor_cpf_cnpj(req.body.cpf_cnpj)) {
+            return res.status(401).json({
+                error: "New CPF already used!"
+            })
+        }
 
+        //Verifica se o email novo já esta sendo utilizado
+        if (util.existe_Vendedor_email(req.body.email)) {
+            return res.status(401).json({
+                error: "New email already used!"
+            })
+        }
+        
         let seller = await connection('sellers')
-            .where(cpf_cnpj)
-            .update(req.body)
-
-        res.json({
-            seller
-        })
+        .where("cpf_cnpj",cpf_cnpj)
+        .update(req.body)
+        
+        res.status(200).send();
     }
 };

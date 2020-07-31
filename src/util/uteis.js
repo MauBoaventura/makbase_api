@@ -48,6 +48,28 @@ module.exports = {
 
     },
 
+    async existe_Vendedor_email(email) {
+        const sellers = await connection('sellers')
+            .select("*")
+            .where("email", email)
+            .first()
+        if (sellers == undefined)
+            return false
+
+        return true;
+    },
+
+    async existe_Cliente_email(email) {
+        const client = await connection('clients')
+            .select("*")
+            .where("email", email)
+            .first()
+        if (client == undefined)
+            return false
+
+        return true;
+    },
+
     async criptografar(senha) {
         try {
             const cipher = crypto.createCipheriv("aes-192-ecb", Buffer.from(encrypted_Key, "base64"), null);
