@@ -2,19 +2,20 @@ const moment = require('moment')
 
 const connection = require('../database/connection')
 const crypto = require('crypto')
-// const encrypted_Key = "CenH@$uPeRF0RTeCenH@$uPeRF0RTe87"
-   const encrypted_Key = process.env.SECRET_PASSWORD
-   
+const encrypted_Key = process.env.SECRET_PASSWORD
+
 module.exports = {
     async existe_cpf_cnpj(cpf_cnpj) {
         const sellers = await connection('sellers')
             .select("*")
             .where("cpf_cnpj", cpf_cnpj)
+            .where("deleted_at", "=", "null")
             .first()
 
         const clients = await connection('clients')
             .select("*")
             .where("cpf", cpf_cnpj)
+            .where("deleted_at", "=", "null")
             .first()
 
         //Se não existir cpf cadastrados retorna false
@@ -28,6 +29,7 @@ module.exports = {
         const sellers = await connection('sellers')
             .select("*")
             .where("cpf_cnpj", cpf_cnpj)
+            .where("deleted_at", "=", "null")
             .first()
         if (sellers == undefined)
             return false
@@ -40,6 +42,7 @@ module.exports = {
         const clients = await connection('clients')
             .select("*")
             .where("cpf", cpf_cnpj)
+            .where("deleted_at", "=", "null")
             .first()
         if (clients == undefined)
             return false
@@ -52,6 +55,7 @@ module.exports = {
         const sellers = await connection('sellers')
             .select("*")
             .where("email", email)
+            .where("deleted_at", "=", "null")
             .first()
         if (sellers == undefined)
             return false
@@ -63,6 +67,7 @@ module.exports = {
         const client = await connection('clients')
             .select("*")
             .where("email", email)
+            .where("deleted_at", "=", "null")
             .first()
         if (client == undefined)
             return false
