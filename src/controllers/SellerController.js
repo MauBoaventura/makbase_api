@@ -30,13 +30,21 @@ module.exports = {
 
     async post(req, res) {
         const cpf_cnpj = req.body.cpf_cnpj;
+        const email = req.body.email;
 
         //Verifica se o cpf_cnpj já esta sendo utilizado
-        if (await util.existe_cpf_cnpj(cpf_cnpj)) {
+        if (await util.existe_Vendedor_cpf_cnpj(cpf_cnpj)) {
             return res.status(401).json({
                 error: "Cpf already used!"
             })
         }
+        
+        if (await util.existe_Vendedor_email(email)) {
+            return res.status(401).json({
+                error: "Cpf already used!"
+            })
+        }
+        
         try {
             //Criptografar senha
             req.body.password = await util.criptografar(req.body.password)

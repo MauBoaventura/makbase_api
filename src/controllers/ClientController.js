@@ -29,11 +29,19 @@ module.exports = {
 
     async post(req, res) {
         const cpf_cnpj = req.body.cpf_cnpj;
+        const email = req.body.email;
 
         //Verifica se o cpf_cnpj já esta sendo utilizado
-        if (util.existe_cpf_cnpj(cpf_cnpj)) {
+        if (util.existe_Cliente_cpf_cnpj(cpf_cnpj)) {
             return res.status(401).json({
                 error: "Cpf already used!"
+            })
+        }
+
+        //Verifica se o email já esta sendo utilizado
+        if (util.existe_Cliente_email(email)) {
+            return res.status(401).json({
+                error: "Email already used!"
             })
         }
 
