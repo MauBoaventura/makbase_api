@@ -9,6 +9,7 @@ exports.up = function (knex, Promise) {
         table.string('password').notNullable();
         table.timestamp('created_at').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'))
         // table.timestamp('updatesd_at').defaultTo(knex.raw('NULL ON UPDATE CURRENT_TIMESTAMP'))
+        table.timestamp('deleted_at')
     })
 };
 
