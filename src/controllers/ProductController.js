@@ -28,7 +28,7 @@ module.exports = {
     },
 
     async post(req, res) {
-        const store_id = req.userId
+        const store_id = req.header('Authorization');
 
         req.body = { store_id: store_id }
 
@@ -42,9 +42,6 @@ module.exports = {
         const id = req.params.id;
 
         //Verificar autorização
-        const store_id = req.userId
-
-        
 
         await connection('products').where("id", id).delete()
 

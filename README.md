@@ -13,97 +13,103 @@ Contém endpoints para cadastro de usuarios e vendedores além de outras funcion
 
 ## Endpoints:
 
-### Cliente
+### Runner
 
 #### Cadastro (POST)
 
-- Cadastra um cliente passando todos os dados:
+- Cadastra um corredor passando todos os dados:
 
 name, age, gender, email, whatsapp, city, uf.
 
+
 #### Listar um (GET)
 
-- Recupera do banco de dados as informações de um cliente
+- Recupera do banco de dados as informações de um corredor
 
 #### Listar todos (GET)
 
-- Recupera do banco de dados as informações de todos cliente
+- Recupera do banco de dados as informações de todos corredor
 
 #### Apagar (DELETE)
 
-- Apaga do banco de dados as informações de um cliente
+- Apaga do banco de dados as informações de um corredor
 
 #### Modificar (PUT)
 
-- Altera do banco de dados as informações de um cliente
+- Altera do banco de dados as informações de um corredor
 
-	cpf_cnpj, name, lastname, email, age
+name, age, gender, email, whatsapp, city, uf.
 
 
-### Vendedor
+### Stages
 
 #### Cadastro (POST)
 
-- Cadastra um vendedor passando todos os dados:
+- Cadastra uma etapa passando todos os dados:
 
-	cpf_cnpj, name, lastname, email, age, password
-    
+name, city, uf
+
 
 #### Listar um (GET)
 
-- Recupera do banco de dados as informações de um vendedor
+- Recupera do banco de dados as informações de uma etapa
 
 #### Listar todos (GET)
 
-- Recupera do banco de dados as informações de todos vendedor
+- Recupera do banco de dados as informações de todos corredor
 
 #### Apagar (DELETE)
 
-- Apaga do banco de dados as informações de um vendedor
+- Apaga do banco de dados as informações de uma etapa
 
 #### Modificar (PUT)
 
-- Altera do banco de dados as informações de um vendedor
+- Altera do banco de dados as informações de uma etapa
 
-	cpf_cnpj, name, lastname, email, age, password
+name, city, uf
 
 
-### Produto
+### Race
 
 #### Cadastro (POST)
 
-- Cadastra um produto passando todos os dados:
+- Informa qual a distancia o corredor vai competir
 
-#### Listar um (GET)
+km
 
-- Recupera do banco de dados as informações de um produto
+#### Lista todos (GET)
 
-#### Listar todos (GET)
+- Recupera do banco de dados as informações de todos os corredor na corrida
 
-- Recupera do banco de dados as informações de todos produto
+#### Lista um (GET)
 
-#### Apagar (DELETE)
+- Recupera do banco de dados as informações de um corredor na corrida
 
-- Apaga do banco de dados as informações de um produto
+#### Qualifica (PUT)
 
-#### Modificar (PUT)
+- Qualifica o corredor na etapa e lhe atribui um numero
 
-- Altera do banco de dados as informações de um produto
+#### Desqualifica (PUT)
 
-	cpf_cnpj, name, lastname, email, age
+- Desqualifica o corredor na etapa 
+
+#### Chegada (PUT)
+
+- Coloca o tempo do corredor na etapa 
+
 
 ### Relatórios
 
-#### Todos clientees (GET)
+#### Todos corredores (GET)
 
-- Recupera do banco de dados as informações de todos os cliente na corrida para exibição do resultado
+- Recupera do banco de dados as informações de todos os corredor na corrida para exibição do resultado
 
-#### Todos clientees por quilometragem (GET)
+#### Todos corredores por quilometragem (GET)
 
-- Recupera do banco de dados as informações de todos os cliente na corrida para exibição do resultado
+- Recupera do banco de dados as informações de todos os corredor na corrida para exibição do resultado
 
-#### Todos clientees por genero (GET)
+#### Todos corredores por genero (GET)
 
-- Recupera do banco de dados as informações de todos os cliente na corrida para exibição do resultado
+- Recupera do banco de dados as informações de todos os corredor na corrida para exibição do resultado
 
 

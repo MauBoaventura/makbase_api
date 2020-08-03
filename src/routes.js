@@ -7,22 +7,19 @@ const ClientController = require('./controllers/ClientController')
 const ProductController = require('./controllers/ProductController')
 const AutenticaController = require('./controllers/AutenticaController')
 const LoginController = require('./controllers/LoginController')
-const util = require('./util/authentication')
 // const RaceController = require('./controllers/RaceController')
 // const MileageController = require('./controllers/MileageController')
 
 //Login email
-routes.get('/', (req, res) => {
+routes.get('/', (req, res)=>{
     res.send("<h1>API MARKBASE ONLINE</h1>")
 })
 routes.get('/loginCliente', LoginController.loginCliente)
 routes.get('/loginVendedor', LoginController.loginVendedor)
-routes.get('/logoutVendedor', util.verificacaoJWT, AutenticaController.logout)
-
 
 
 // Autenticacao Google
-routes.get('/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email'] }))
+routes.get('/google', passport.authenticate('google', {scope: ['https://www.googleapis.com/auth/userinfo.profile','https://www.googleapis.com/auth/userinfo.email']}))
 
 routes.get('/google/callback', passport.authenticate('google', { failureRedirect: '/fail' }),
     (req, res) => {
@@ -51,9 +48,9 @@ routes.delete('/cliente/:cpf_cnpj', ClientController.delete)
 // Produtos Cliente
 // routes.get('/produto', ProductController.index)
 routes.get('/produto/:id', ProductController.get)
-routes.post('/produto', util.verificacaoJWT_isVendedor ,ProductController.post)
-routes.put('/produto/:id', util.verificacaoJWT_isVendedor,ProductController.update)
-routes.delete('/produto/:id',util.verificacaoJWT_isVendedor, ProductController.delete)
+routes.post('/produto', ProductController.post)
+routes.put('/produto/:id', ProductController.update)
+routes.delete('/produto/:id', ProductController.delete)
 
 // // Configurações
 // routes.get('/quilometragem', MileageController.get)
