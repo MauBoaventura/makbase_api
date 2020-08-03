@@ -1,6 +1,7 @@
 const util = require('../util/uteis')
 const authentication = require('../util/authentication')
 const connection = require('../database/connection');
+const { logout } = require('./AutenticaController');
 
 module.exports = {
     async loginCliente(req, res) {
@@ -23,9 +24,9 @@ module.exports = {
             })
 
         delete client.password
-        
+
         return res.status(200).json({
-            token: authentication.gerarJWT({ cpf: client.cpf }),
+            token: authentication.gerarJWT({ id: client.cpf }),
         })
     },
 
@@ -51,8 +52,12 @@ module.exports = {
         delete seller.password
 
         return res.status(200).json({
-            token: authentication.gerarJWT({ cpf_cnpj: seller.cpf_cnpj }),
+            token: authentication.gerarJWT({ id: seller.cpf_cnpj }),
             user: seller,
         })
     },
+
+    async logout(req, res) {
+
+    }
 }
