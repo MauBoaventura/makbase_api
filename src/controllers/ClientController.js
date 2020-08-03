@@ -54,7 +54,6 @@ module.exports = {
 
     async delete(req, res) {
         const cliente_header = req.userId;
-
         const cpf_cnpj = req.params.cpf_cnpj;
 
         if (cliente_header == cpf_cnpj) {
@@ -81,7 +80,6 @@ module.exports = {
 
     async update(req, res) {
         const cliente_header = req.userId;
-
         const cpf = req.params.cpf_cnpj;
 
         if (cliente_header == cpf_cnpj) {

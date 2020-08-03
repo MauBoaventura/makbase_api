@@ -14,15 +14,13 @@ module.exports = {
 
     async get(req, res) {
         const id = req.params.id;
-
         const product = await connection('products')
             .select("*")
             .where("id", id)
             .first()
-
         if (product == undefined)
             return res.status(401).json({
-                error: "Product do not exist"
+                msg: "Product do not exist"
             })
         res.json(product)
     },
@@ -40,27 +38,43 @@ module.exports = {
 
     async delete(req, res) {
         const id = req.params.id;
-
-        //Verificar autorização
         const store_id = req.userId
 
-        
+        const product = await connection('products')
+            .select("*")
+            .where("id", id)
+            .first()
 
-        await connection('products').where("id", id).delete()
+        //Verificar autorização
+        if (product.store_id == store_id) {
+            await connection('products')
+                .where("id", id)
+                .update("deleted_at", Date.now)
 
-        res.status(204).send()
+            res.status(204).send()
+        } else {
+            return res.status(401).json({
+                msg: "Access Denied"
+            })
+        }
     },
 
     async update(req, res) {
-        const cpf_cnpj = req.params.cpf_cnpj;
+        const id = req.params.id;
+        const store_id = req.userId
 
-        //Verifica se 
-              let client = await connection('products')
-            .where(cpf_cnpj)
-            .update(req.body)
+        const product = await connection('products')
+            .select("*")
+            .where("id", id)
+            .first()
 
-        res.json({
-            client
-        })
+        //Verificar autorização
+        if (product.store_id == store_id) {
+            let client = await connection('products')
+                .where("id", id)
+                .update(req.body)
+
+            res.status(200).send();
+        }
     }
 };
