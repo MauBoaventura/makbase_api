@@ -9,9 +9,9 @@ exports.up = function (knex, Promise) {
         table.string('email').notNullable().primary();
         table.datetime('age').notNullable();
         table.string('password').notNullable();
-        table.timestamp('created_at').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'))
+        table.timestamp('created_at').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'));
         // table.timestamp('updated_at').defaultTo(knex.raw('NULL ON UPDATE CURRENT_TIMESTAMP'))
-        table.timestamp('deleted_at')
+        table.datetime('deleted_at');
 
     })
 };
