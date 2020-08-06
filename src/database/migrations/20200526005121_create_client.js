@@ -3,7 +3,7 @@ exports.up = function (knex, Promise) {
         table.increments();
         knex.raw('`id` INT NULL AUTO_INCREMENT);');
         table.string('cpf').notNullable().unique();
-        table.binary('avatar').notNullable();
+        table.binary('avatar');
         table.string('name').notNullable();
         table.string('lastname').notNullable();
         table.string('email').notNullable().unique();
