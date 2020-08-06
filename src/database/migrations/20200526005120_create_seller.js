@@ -1,10 +1,11 @@
 exports.up = function (knex, Promise) {
     return knex.schema.createTable('sellers', function (table) {
+        table.increments();
         table.string('cpf_cnpj').notNullable().unique();
         table.binary('avatar');
         table.string('name').notNullable();
         table.string('lastname').notNullable();
-        table.string('email').notNullable().primary();
+        table.string('email').notNullable().unique();
         table.datetime('age').notNullable();
         table.string('password').notNullable();
         table.timestamp('created_at').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'));
