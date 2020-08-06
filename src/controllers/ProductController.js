@@ -20,7 +20,7 @@ module.exports = {
             .first()
         if (product == undefined)
             return res.status(401).json({
-                msg: "Product do not exist"
+                error: "Product do not exist"
             })
         res.json(product)
     },
@@ -54,7 +54,7 @@ module.exports = {
             res.status(204).send()
         } else {
             return res.status(401).json({
-                msg: "Access Denied"
+                error: "Access Denied"
             })
         }
     },

@@ -69,7 +69,7 @@ module.exports = {
 
             if (!util.existe_Vendedor_cpf_cnpj(cpf_cnpj)) {
                 return res.status(401).json({
-                    msg: "Seller do not exist!"
+                    error: "Seller do not exist!"
                 })
             }
 
@@ -80,7 +80,7 @@ module.exports = {
             res.status(204).send()
         } else {
             return res.status(401).json({
-                msg: "Access Denied!"
+                error: "Access Denied!"
             })
         }
     },
@@ -99,7 +99,7 @@ module.exports = {
             //Verifica se o cpf_cnpj já esta sendo utilizado
             if (!util.existe_Vendedor_cpf_cnpj(cpf_cnpj)) {
                 return res.status(401).json({
-                    msg: "Vendedor do not exist!"
+                    error: "Vendedor do not exist!"
                 })
             }
 
@@ -107,7 +107,7 @@ module.exports = {
                 //Verifica se o cpf_cnpj novo já esta sendo utilizado
                 if (util.existe_Vendedor_cpf_cnpj(req.body.cpf_cnpj)) {
                     return res.status(401).json({
-                        msg: "New CPF already used!"
+                        error: "New CPF already used!"
                     })
                 }
 
@@ -115,7 +115,7 @@ module.exports = {
                 //Verifica se o email novo já esta sendo utilizado
                 if (util.existe_Vendedor_email(req.body.email)) {
                     return res.status(401).json({
-                        msg: "New email already used!"
+                        error: "New email already used!"
                     })
                 }
             }
@@ -126,7 +126,7 @@ module.exports = {
             res.status(200).send()
         } else {
             return res.status(401).json({
-                msg: "Access Denied!"
+                error: "Access Denied!"
             })
         }
 

@@ -8,7 +8,7 @@ module.exports = {
 
     async success_login(req, res) {
         res.json({
-            msg: "You are in the aplication",
+            error: "You are in the aplication",
             dados: req.user
         })
     },

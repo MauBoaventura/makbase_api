@@ -60,7 +60,7 @@ module.exports = {
             //Verifica se o cpf_cnpj existe
             if (!util.existe_Cliente_cpf_cnpj(cpf_cnpj)) {
                 return res.status(401).json({
-                    msg: "Client do not exist!"
+                    error: "Client do not exist!"
                 })
             }
 
@@ -72,7 +72,7 @@ module.exports = {
 
         } else {
             return res.status(401).json({
-                msg: "Access Denied!"
+                error: "Access Denied!"
             })
         }
 
@@ -92,7 +92,7 @@ module.exports = {
             //Verifica se o cpf_cnpj já esta sendo utilizado
             if (!util.existe_Cliente_cpf_cnpj(cpf)) {
                 return res.status(401).json({
-                    msg: "Client do not exist!"
+                    error: "Client do not exist!"
                 })
             }
 
@@ -100,7 +100,7 @@ module.exports = {
                 //Verifica se o cpf_cnpj novo já esta sendo utilizado
                 if (util.existe_Cliente_cpf_cnpj(req.body.cpf_cnpj)) {
                     return res.status(401).json({
-                        msg: "New CPF already used!"
+                        error: "New CPF already used!"
                     })
                 }
 
@@ -108,7 +108,7 @@ module.exports = {
                 //Verifica se o email novo já esta sendo utilizado
                 if (util.existe_Cliente_email(req.body.email)) {
                     return res.status(401).json({
-                        msg: "New email already used!"
+                        error: "New email already used!"
                     })
                 }
             }
@@ -119,7 +119,7 @@ module.exports = {
             res.status(200).send()
         } else {
             return res.status(401).json({
-                msg: "Access Denied!"
+                error: "Access Denied!"
             })
         }
 

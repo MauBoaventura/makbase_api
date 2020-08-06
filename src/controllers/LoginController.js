@@ -15,12 +15,12 @@ module.exports = {
 
         if (client == undefined)
             return res.status(401).json({
-                msg: "Cliente não cadastrado"
+                error: "Cliente não cadastrado"
             })
 
         if (util.descriptografar(client.password) == password)
             return res.status(401).json({
-                msg: "Senha incorreta"
+                error: "Senha incorreta"
             })
 
         delete client.password
@@ -41,12 +41,12 @@ module.exports = {
 
         if (seller == undefined)
             return res.status(401).json({
-                msg: "Vendedor não existe"
+                error: "Vendedor não existe"
             })
 
         if (util.descriptografar(seller.password) == password)
             return res.status(401).json({
-                msg: "Senha incorreta"
+                error: "Senha incorreta"
             })
 
         delete seller.password
