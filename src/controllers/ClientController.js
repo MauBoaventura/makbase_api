@@ -2,51 +2,55 @@ const crypto = require('crypto')
 const moment = require('moment')
 const connection = require('../database/connection')
 const util = require('../util/uteis')
+const DAO_Client = require('../database/DAO/DAOClient')
+const DAOClient = require('../database/DAO/DAOClient')
 
 module.exports = {
     async index(req, res) {
 
-        const client = await connection('clients')
-            .select("*")
+        const client = await DAO_Client.getAll()
 
         res.json(client)
     },
 
     async get(req, res) {
-        const cpf_cnpj = req.params.cpf_cnpj;
+        const cpf = req.params.cpf;
 
-        const client = await connection('clients')
-            .select("*")
-            .where("cpf", cpf_cnpj)
-            .first()
-
+        const client = await DAO_Client.getOne_byCPF(cpf)
         if (client == undefined)
             return res.status(401).json({
-                msg: "Client do not exist"
+                error: "Client do not exist"
             })
         res.json(client)
     },
 
     async post(req, res) {
-        const cpf_cnpj = req.body.cpf_cnpj;
+        const cpf = req.body.cpf;
         const email = req.body.email;
 
-        //Verifica se o cpf_cnpj já esta sendo utilizado
-        if (util.existe_Cliente_cpf_cnpj(cpf_cnpj)) {
+        //Verifica se o cpf já esta sendo utilizado
+        if (await util.existe_Cliente_cpf(cpf)) {
             return res.status(401).json({
-                msg: "Cpf already used!"
+                error: "Cpf already used!"
             })
         }
 
         //Verifica se o email já esta sendo utilizado
-        if (util.existe_Cliente_email(email)) {
+        let resp = await util.existe_Cliente_email(email)
+        console.log(resp)
+        if (resp) {
             return res.status(401).json({
-                msg: "Email already used!"
+                error: "Email already used!"
             })
         }
 
         //Insere no banco
-        await connection('clients').insert(req.body)
+        try {
+            req.body.password = await util.criptografar(req.body.password)
+            await connection('clients').insert(req.body)
+        } catch (error) {
+            res.status(400).send({ error: error })
+        }
 
 
         res.status(200).send()
@@ -54,20 +58,16 @@ module.exports = {
 
     async delete(req, res) {
         const cliente_header = req.userId;
-        const cpf_cnpj = req.params.cpf_cnpj;
-
-        if (cliente_header == cpf_cnpj) {
-            //Verifica se o cpf_cnpj existe
-            if (!util.existe_Cliente_cpf_cnpj(cpf_cnpj)) {
+        const cpf = req.params.cpf;
+        if (cliente_header == cpf) {
+            //Verifica se o cpf existe
+            if (! await util.existe_Cliente_cpf(cpf)) {
                 return res.status(401).json({
                     error: "Client do not exist!"
                 })
             }
-
-            await connection('clients')
-                .where({ cpf: cpf })
-                .update("deleted_at", Date.now)
-
+            await DAOClient.deleteOneByCPF(cpf);
+            
             res.status(204).send()
 
         } else {
@@ -80,25 +80,21 @@ module.exports = {
 
     async update(req, res) {
         const cliente_header = req.userId;
-        const cpf = req.params.cpf_cnpj;
+        const cpf = req.params.cpf;
 
         if (cliente_header == cpf) {
+            const client = await DAO_Client.getOne_byCPF(cpf)
 
-            const client = await connection('clients')
-                .select("*")
-                .where("cpf", cpf)
-                .first()
-
-            //Verifica se o cpf_cnpj já esta sendo utilizado
-            if (!util.existe_Cliente_cpf_cnpj(cpf)) {
+            //Verifica se o cpf já esta sendo utilizado
+            if (!await util.existe_Cliente_cpf(cpf)) {
                 return res.status(401).json({
                     error: "Client do not exist!"
                 })
             }
 
-            if (req.body.cpf_cnpj != cliente_header)
-                //Verifica se o cpf_cnpj novo já esta sendo utilizado
-                if (util.existe_Cliente_cpf_cnpj(req.body.cpf_cnpj)) {
+            if (req.body.cpf != cliente_header)
+                //Verifica se o cpf novo já esta sendo utilizado
+                if (await util.existe_Cliente_cpf(req.body.cpf)) {
                     return res.status(401).json({
                         error: "New CPF already used!"
                     })
@@ -106,17 +102,15 @@ module.exports = {
 
             if (client.email != req.body.email) {
                 //Verifica se o email novo já esta sendo utilizado
-                if (util.existe_Cliente_email(req.body.email)) {
+                if (await util.existe_Cliente_email(req.body.email)) {
                     return res.status(401).json({
                         error: "New email already used!"
                     })
                 }
             }
-            await connection('clients')
-                .where({ cpf: cpf })
-                .update(req.body)
-
-            res.status(200).send()
+            await DAO_Client.updateOneByCPF(cpf,req.body)
+            
+            return res.status(200).send()
         } else {
             return res.status(401).json({
                 error: "Access Denied!"

@@ -43,17 +43,17 @@ routes.delete('/vendedor/:cpf_cnpj', SellerController.delete)
 
 // Clientes
 routes.get('/cliente', ClientController.index)
-routes.get('/cliente/:cpf_cnpj', ClientController.get)
+routes.get('/cliente/:cpf', ClientController.get)
 routes.post('/cliente', ClientController.post)
-routes.put('/cliente/:cpf_cnpj', ClientController.update)
-routes.delete('/cliente/:cpf_cnpj', ClientController.delete)
+routes.put('/cliente/:cpf', util.verificacaoJWT_isCliente, ClientController.update)
+routes.delete('/cliente/:cpf', util.verificacaoJWT_isCliente, ClientController.delete)
 
 // Produtos Cliente
 // routes.get('/produto', ProductController.index)
 routes.get('/produto/:id', ProductController.get)
-routes.post('/produto', util.verificacaoJWT_isVendedor ,ProductController.post)
-routes.put('/produto/:id', util.verificacaoJWT_isVendedor,ProductController.update)
-routes.delete('/produto/:id',util.verificacaoJWT_isVendedor, ProductController.delete)
+routes.post('/produto', util.verificacaoJWT_isVendedor, ProductController.post)
+routes.put('/produto/:id', util.verificacaoJWT_isVendedor, ProductController.update)
+routes.delete('/produto/:id', util.verificacaoJWT_isVendedor, ProductController.delete)
 
 // // Configurações
 // routes.get('/quilometragem', MileageController.get)

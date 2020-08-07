@@ -38,16 +38,22 @@ module.exports = {
 
     },
 
-    async existe_Cliente_cpf_cnpj(cpf_cnpj) {
-        const clients = await connection('clients')
-            .select("*")
-            .where("cpf", cpf_cnpj)
-            .where("deleted_at", "=", "null")
-            .first()
-        if (clients == undefined)
-            return false
+    async existe_Cliente_cpf(cpf_cnpj) {
+        try {
+            const clients = await connection('clients')
+                .select("*")
+                .where({ "cpf": cpf_cnpj, "deleted_at": null })
+                .first()
 
-        return true;
+            if (clients == undefined) {
+                return false
+            }
+            return true;
+        
+        } catch (error) {
+            throw error
+            // return false
+        }
 
     },
 
@@ -66,8 +72,7 @@ module.exports = {
     async existe_Cliente_email(email) {
         const client = await connection('clients')
             .select("*")
-            .where("email", email)
-            .where("deleted_at", "=", "null")
+            .where({"email": email, "deleted_at":null})
             .first()
         if (client == undefined)
             return false
@@ -85,7 +90,7 @@ module.exports = {
         }
     },
 
-    async descriptografar(senha) {
+    descriptografar(senha) {
         const decipher = crypto.createDecipheriv("aes-192-ecb", Buffer.from(encrypted_Key, "base64"), null);
         const decryptedSecret = decipher.update(senha, "base64", "utf8") + decipher.final("utf8");
         return decryptedSecret;

@@ -1,24 +1,20 @@
 const util = require('../util/uteis')
 const authentication = require('../util/authentication')
 const connection = require('../database/connection');
-const { logout } = require('./AutenticaController');
-
+const DAOClient = require ('../database/DAO/DAOClient')
 module.exports = {
     async loginCliente(req, res) {
         const email = req.body.email;
         const password = req.body.password;
 
-        const client = await connection('clients')
-            .select("*")
-            .where("email", email)
-            .first()
+        const client = await DAOClient.getOneByEmail(email)
 
         if (client == undefined)
             return res.status(401).json({
                 error: "Cliente não cadastrado"
             })
 
-        if (util.descriptografar(client.password) == password)
+        if (util.descriptografar(client.password) != password)
             return res.status(401).json({
                 error: "Senha incorreta"
             })

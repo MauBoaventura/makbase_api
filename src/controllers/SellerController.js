@@ -24,7 +24,7 @@ module.exports = {
             return res.status(401).json({
                 error: "Sellers not exist"
             })
-        dados.password = await util.descriptografar(dados.password)
+        dados.password = util.descriptografar(dados.password)
         res.json(dados)
     },
 

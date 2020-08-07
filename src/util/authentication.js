@@ -80,7 +80,7 @@ module.exports = {
         jwt.verify(token, process.env.SECRET_JWT, (err, decoded) => {
             if (err) return res.status(401).send({ msg: "Tokem malformatado" })
 
-            if (util.existe_Cliente_cpf_cnpj(decoded.id)) {
+            if (util.existe_Cliente_cpf(decoded.id)) {
                 req.userId = decoded.id;
                 return next()
             } else {
@@ -91,7 +91,7 @@ module.exports = {
 
     gerarJWT(params = {}) {
         return jwt.sign(params, process.env.SECRET_JWT, {
-            expiresIn: 600,
+            expiresIn: 60000,
         });
     }
 }
