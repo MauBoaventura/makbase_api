@@ -3,7 +3,6 @@ const moment = require('moment')
 const connection = require('../database/connection')
 const util = require('../util/uteis')
 const DAO_Client = require('../database/DAO/DAOClient')
-const DAOClient = require('../database/DAO/DAOClient')
 
 module.exports = {
     async index(req, res) {
@@ -66,7 +65,7 @@ module.exports = {
                     error: "Client do not exist!"
                 })
             }
-            await DAOClient.deleteOneByCPF(cpf);
+            await DAO_Client.deleteOneByCPF(cpf);
             
             res.status(204).send()
 
