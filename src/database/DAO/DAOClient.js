@@ -1,6 +1,5 @@
 const connection = require('../connection')
 const moment = require('moment')
-const { update } = require('../connection')
 
 module.exports = {
     async getAll() {
