@@ -12,8 +12,8 @@ exports.up = function (knex, Promise) {
         table.string('number').notNullable();
         table.string('complement').notNullable();
 
-        table.string('created_by').notNullable();
-        table.foreign('created_by').references('cpf_cnpj').inTable('sellers')
+        table.integer('created_by').notNullable().unsigned();
+        table.foreign('created_by').references('id').inTable('sellers')
 
         table.timestamp('created_at').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'))
         // table.timestamp('updated_at').defaultTo(knex.raw('NULL ON UPDATE CURRENT_TIMESTAMP'))
