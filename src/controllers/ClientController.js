@@ -33,9 +33,7 @@ module.exports = {
         }
 
         //Verifica se o email já esta sendo utilizado
-        let resp = await util.existe_Cliente_email(email)
-        console.log(resp)
-        if (resp) {
+        if (await util.existe_Cliente_email(email)) {
             return res.status(401).json({
                 error: "Email already used!"
             })
@@ -44,12 +42,10 @@ module.exports = {
         //Insere no banco
         try {
             req.body.password = await util.criptografar(req.body.password)
-            await connection('clients').insert(req.body)
+            await DAO_Client.insert(req.body)
         } catch (error) {
             res.status(400).send({ error: error })
         }
-
-
         res.status(200).send()
     },
 

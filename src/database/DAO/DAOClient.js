@@ -61,7 +61,17 @@ module.exports = {
             return { error: err }
         }
         return client;
-    }
+    },
+
+    async insert(dados) {
+        try {
+           await connection('clients').insert(dados)
+        } catch (err) {
+            return { error: err }
+        }
+    },
+
+
 
 
 }
