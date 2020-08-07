@@ -1,7 +1,8 @@
 const util = require('../util/uteis')
 const authentication = require('../util/authentication')
 const connection = require('../database/connection');
-const DAOClient = require ('../database/DAO/DAOClient')
+const DAOClient = require('../database/DAO/DAOClient');
+const DAOSeller = require('../database/DAO/DAOSeller');
 module.exports = {
     async loginCliente(req, res) {
         const email = req.body.email;
@@ -30,17 +31,14 @@ module.exports = {
         const email = req.body.email;
         const password = req.body.password;
 
-        const seller = await connection('sellers')
-            .select("*")
-            .where("email", email)
-            .first()
+        const seller = await DAOSeller.getOneByEmail(email)
 
         if (seller == undefined)
             return res.status(401).json({
-                error: "Vendedor não existe"
+                error: "Vendedor não cadastrado"
             })
 
-        if (util.descriptografar(seller.password) == password)
+        if (util.descriptografar(seller.password) != password)
             return res.status(401).json({
                 error: "Senha incorreta"
             })
@@ -51,6 +49,7 @@ module.exports = {
             token: authentication.gerarJWT({ id: seller.cpf_cnpj }),
             user: seller,
         })
+
     },
 
     async logout(req, res) {

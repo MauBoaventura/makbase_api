@@ -38,8 +38,8 @@ routes.get('/logout', AutenticaController.logout)
 routes.get('/vendedor', SellerController.index)
 routes.get('/vendedor/:cpf_cnpj', SellerController.get)
 routes.post('/vendedor', SellerController.post)
-routes.put('/vendedor/:cpf_cnpj', SellerController.update)
-routes.delete('/vendedor/:cpf_cnpj', SellerController.delete)
+routes.put('/vendedor/:cpf_cnpj', util.verificacaoJWT_isVendedor, SellerController.update)
+routes.delete('/vendedor/:cpf_cnpj', util.verificacaoJWT_isVendedor, SellerController.delete)
 
 // Clientes
 routes.get('/cliente', ClientController.index)

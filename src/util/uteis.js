@@ -8,14 +8,12 @@ module.exports = {
     async existe_cpf_cnpj(cpf_cnpj) {
         const sellers = await connection('sellers')
             .select("*")
-            .where("cpf_cnpj", cpf_cnpj)
-            .where("deleted_at", "=", "null")
+            .where({ "cpf_cnpj": cpf_cnpj, "deleted_at": null })
             .first()
 
         const clients = await connection('clients')
             .select("*")
-            .where("cpf", cpf_cnpj)
-            .where("deleted_at", "=", "null")
+            .where({ "cpf": cpf_cnpj, "deleted_at": null })
             .first()
 
         //Se não existir cpf cadastrados retorna false
@@ -28,8 +26,7 @@ module.exports = {
     async existe_Vendedor_cpf_cnpj(cpf_cnpj) {
         const sellers = await connection('sellers')
             .select("*")
-            .where("cpf_cnpj", cpf_cnpj)
-            .where("deleted_at", "=", "null")
+            .where({ "cpf_cnpj": cpf_cnpj, "deleted_at": null })
             .first()
         if (sellers == undefined)
             return false
@@ -60,8 +57,7 @@ module.exports = {
     async existe_Vendedor_email(email) {
         const sellers = await connection('sellers')
             .select("*")
-            .where("email", email)
-            .where("deleted_at", "=", "null")
+            .where({ "email": email, "deleted_at": null })
             .first()
         if (sellers == undefined)
             return false
