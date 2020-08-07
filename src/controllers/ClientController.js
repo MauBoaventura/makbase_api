@@ -60,7 +60,7 @@ module.exports = {
                 })
             }
             await DAO_Client.deleteOneByCPF(cpf);
-            
+
             res.status(204).send()
 
         } else {
@@ -102,8 +102,8 @@ module.exports = {
                 }
             }
             req.body.password = await util.criptografar(req.body.password)
-            await DAO_Client.updateOneByCPF(cpf,req.body)
-            
+            await DAO_Client.updateOneByCPF(cpf, req.body)
+
             return res.status(200).send()
         } else {
             return res.status(401).json({
