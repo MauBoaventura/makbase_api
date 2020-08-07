@@ -13,7 +13,7 @@ module.exports = {
     async get(req, res) {
         const cpf = req.params.cpf;
 
-        const client = await DAO_Client.getOne_byCPF(cpf)
+        const client = await DAO_Client.getOneByCPF(cpf)
         if (client == undefined)
             return res.status(401).json({
                 error: "Client do not exist"
@@ -76,7 +76,7 @@ module.exports = {
         const cpf = req.params.cpf;
 
         if (cliente_header == cpf) {
-            const client = await DAO_Client.getOne_byCPF(cpf)
+            const client = await DAO_Client.getOneByCPF(cpf)
 
             //Verifica se o cpf já esta sendo utilizado
             if (!await util.existe_Cliente_cpf(cpf)) {

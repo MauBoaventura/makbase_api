@@ -14,7 +14,7 @@ module.exports = {
 
     },
 
-    async getOne_byCPF(cpf) {
+    async getOneByCPF(cpf) {
         try {
             var client = await connection('clients')
                 .select("*")
