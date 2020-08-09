@@ -13,6 +13,16 @@ Contém endpoints para cadastro de usuarios e vendedores além de outras funcion
 
 ## Endpoints:
 
+### Login
+
+#### Cliente (POST)
+
+- Realiza uma pesquisa na base de dados de clientes e retorna um JWT e os dados do cliente 
+
+#### Vendedor (POST)
+
+- Realiza uma pesquisa na base de dados de vendedor e retorna um JWT e os dados do vendedor 
+
 ### Cliente
 
 #### Cadastro (POST)
@@ -119,19 +129,4 @@ name, age, gender, email, whatsapp, city, uf.
 - Altera do banco de dados as informações de um produto
 
 	store_id, status, name, sku, unit_price, unit_price_discount, description, stock, seo_description, seo_name, category_id, collor_id, size_id
-
-### Relatórios
-
-#### Todos clientees (GET)
-
-- Recupera do banco de dados as informações de todos os cliente na corrida para exibição do resultado
-
-#### Todos clientees por quilometragem (GET)
-
-- Recupera do banco de dados as informações de todos os cliente na corrida para exibição do resultado
-
-#### Todos clientees por genero (GET)
-
-- Recupera do banco de dados as informações de todos os cliente na corrida para exibição do resultado
-
 
