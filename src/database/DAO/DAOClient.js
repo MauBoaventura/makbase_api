@@ -41,7 +41,6 @@ module.exports = {
     async deleteOneByCPF(cpf) {
         try {
             let data = moment().format();
-            console.log(data)
             var client = await connection('clients')
                 .update("deleted_at", moment().format("YYYY-MM-DD HH:mm:ss"))
                 .where({ "cpf": cpf, "deleted_at": null })

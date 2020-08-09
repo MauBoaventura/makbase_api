@@ -15,10 +15,8 @@ module.exports = {
 
     isLoggedIn(req, res, next) {
         if (req.user) {
-            console.log('1')
             next()
         } else {
-            console.log('2')
             return res.status(401).send()
         }
     },

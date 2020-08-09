@@ -24,7 +24,6 @@ module.exports = {
             if (err) return res.status(401).send({ msg: "Tokem malformatado" })
 
             req.userId = decoded.id;
-            console.log(req.userId);
             return next()
         })
     },
