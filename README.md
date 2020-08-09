@@ -29,11 +29,11 @@ name, age, gender, email, whatsapp, city, uf.
 
 - Recupera do banco de dados as informações de todos cliente
 
-#### Apagar (DELETE)
+#### Apagar (DELETE) - Necessário estar autenticado e com um Token JWT
 
 - Apaga do banco de dados as informações de um cliente
 
-#### Modificar (PUT)
+#### Modificar (PUT) - Necessário estar autenticado e com um Token JWT
 
 - Altera do banco de dados as informações de um cliente
 
@@ -57,11 +57,11 @@ name, age, gender, email, whatsapp, city, uf.
 
 - Recupera do banco de dados as informações de todos vendedor
 
-#### Apagar (DELETE)
+#### Apagar (DELETE) - Necessário estar autenticado e com um Token JWT
 
 - Apaga do banco de dados as informações de um vendedor
 
-#### Modificar (PUT)
+#### Modificar (PUT) - Necessário estar autenticado e com um Token JWT
 
 - Altera do banco de dados as informações de um vendedor
 
@@ -70,7 +70,7 @@ name, age, gender, email, whatsapp, city, uf.
 
 ### Produto
 
-#### Cadastro (POST)
+#### Cadastro (POST) - Necessário estar autenticado e com um Token JWT
 
 - Cadastra um produto passando todos os dados:
 	store_id, status, name, sku, unit_price, unit_price_discount, description, stock, seo_description, seo_name, category_id, collor_id, size_id
@@ -83,11 +83,11 @@ name, age, gender, email, whatsapp, city, uf.
 
 - Recupera do banco de dados as informações de todos produto
 
-#### Apagar (DELETE)
+#### Apagar (DELETE) - Necessário estar autenticado e com um Token JWT
 
 - Apaga do banco de dados um produto setando um novo status
 
-#### Modificar (PUT)
+#### Modificar (PUT) - Necessário estar autenticado e com um Token JWT
 
 - Altera do banco de dados as informações de um produto
 
