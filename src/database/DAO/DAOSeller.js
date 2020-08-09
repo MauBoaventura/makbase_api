@@ -38,6 +38,18 @@ module.exports = {
         return seller;
     },
 
+    async getOneById(id) {
+        try {
+            var seller = await connection('sellers')
+                .select("*")
+                .where({ "id": id, "deleted_at": null })
+                .first()
+        } catch (err) {
+            return { error: err }
+        }
+        return seller;
+    },
+
     async deleteOneByCPF(cpf_cnpj) {
         try {
             let data = moment().format();

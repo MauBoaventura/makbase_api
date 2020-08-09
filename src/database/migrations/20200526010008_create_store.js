@@ -2,7 +2,7 @@ exports.up = function (knex, Promise) {
     return knex.schema.createTable('stores', function (table) {
         table.increments().primary();
 
-        table.binary('logo').notNullable();
+        table.binary('logo');
         table.string('fantasy_name').notNullable();
         table.string('legal_name').notNullable();
         table.string('state_registration').notNullable();

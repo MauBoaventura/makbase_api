@@ -46,10 +46,10 @@ module.exports = {
             return res.status(401).send({ msg: "Tokem malformatado" })
         }
 
-        jwt.verify(token, process.env.SECRET_JWT, (err, decoded) => {
+        jwt.verify(token, process.env.SECRET_JWT, async (err, decoded) => {
             if (err) return res.status(401).send({ msg: "Tokem malformatado" })
 
-            if (util.existe_Vendedor_cpf_cnpj(decoded.id)) {
+            if (await util.existe_Vendedor_cpf_cnpj(decoded.id)) {
                 req.userId = decoded.id;
                 return next()
             } else {
@@ -76,10 +76,10 @@ module.exports = {
             return res.status(401).send({ msg: "Tokem malformatado" })
         }
 
-        jwt.verify(token, process.env.SECRET_JWT, (err, decoded) => {
+        jwt.verify(token, process.env.SECRET_JWT, async (err, decoded) => {
             if (err) return res.status(401).send({ msg: "Tokem malformatado" })
 
-            if (util.existe_Cliente_cpf(decoded.id)) {
+            if (await util.existe_Cliente_cpf(decoded.id)) {
                 req.userId = decoded.id;
                 return next()
             } else {

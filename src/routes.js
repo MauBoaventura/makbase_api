@@ -2,14 +2,14 @@ const express = require('express')
 const routes = express.Router()
 const passport = require('passport')
 
-const SellerController = require('./controllers/SellerController')
-const ClientController = require('./controllers/ClientController')
-const ProductController = require('./controllers/ProductController')
-const AutenticaController = require('./controllers/AutenticaController')
 const LoginController = require('./controllers/LoginController')
+const AutenticaController = require('./controllers/AutenticaController')
 const util = require('./util/authentication')
-// const RaceController = require('./controllers/RaceController')
-// const MileageController = require('./controllers/MileageController')
+
+const ClientController = require('./controllers/ClientController')
+const SellerController = require('./controllers/SellerController')
+const StoreController = require('./controllers/StoreController')
+const ProductController = require('./controllers/ProductController')
 
 //Login email
 routes.get('/', (req, res) => {
@@ -18,8 +18,6 @@ routes.get('/', (req, res) => {
 routes.get('/loginCliente', LoginController.loginCliente)
 routes.get('/loginVendedor', LoginController.loginVendedor)
 routes.get('/logoutVendedor', util.verificacaoJWT, AutenticaController.logout)
-
-
 
 // Autenticacao Google
 routes.get('/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email'] }))
@@ -34,13 +32,6 @@ routes.get('/fail', AutenticaController.fail_login)
 routes.get('/good', AutenticaController.isLoggedIn, AutenticaController.success_login)
 routes.get('/logout', AutenticaController.logout)
 
-// Vendedores
-routes.get('/vendedor', SellerController.index)
-routes.get('/vendedor/:cpf_cnpj', SellerController.get)
-routes.post('/vendedor', SellerController.post)
-routes.put('/vendedor/:cpf_cnpj', util.verificacaoJWT_isVendedor, SellerController.update)
-routes.delete('/vendedor/:cpf_cnpj', util.verificacaoJWT_isVendedor, SellerController.delete)
-
 // Clientes
 routes.get('/cliente', ClientController.index)
 routes.get('/cliente/:cpf', ClientController.get)
@@ -48,18 +39,26 @@ routes.post('/cliente', ClientController.post)
 routes.put('/cliente/:cpf', util.verificacaoJWT_isCliente, ClientController.update)
 routes.delete('/cliente/:cpf', util.verificacaoJWT_isCliente, ClientController.delete)
 
-// Produtos Cliente
-// routes.get('/produto', ProductController.index)
+// Vendedores
+routes.get('/vendedor', SellerController.index)
+routes.get('/vendedor/:cpf_cnpj', SellerController.get)
+routes.post('/vendedor', SellerController.post)
+routes.put('/vendedor/:cpf_cnpj', util.verificacaoJWT_isVendedor, SellerController.update)
+routes.delete('/vendedor/:cpf_cnpj', util.verificacaoJWT_isVendedor, SellerController.delete)
+
+// Lojas
+routes.get('/loja', StoreController.index)
+routes.get('/loja/:id', StoreController.get)
+routes.post('/loja', util.verificacaoJWT_isVendedor, StoreController.post)
+routes.put('/loja/:id', util.verificacaoJWT_isVendedor, StoreController.update)
+routes.delete('/loja/:id', util.verificacaoJWT_isVendedor, StoreController.delete)
+
+// Produtos Produto
+routes.get('/produto', ProductController.index)
 routes.get('/produto/:id', ProductController.get)
 routes.post('/produto', util.verificacaoJWT_isVendedor, ProductController.post)
 routes.put('/produto/:id', util.verificacaoJWT_isVendedor, ProductController.update)
 routes.delete('/produto/:id', util.verificacaoJWT_isVendedor, ProductController.delete)
-
-// // Configurações
-// routes.get('/quilometragem', MileageController.get)
-// routes.post('/quilometragem', MileageController.create)
-// routes.delete('/quilometragem', MileageController.delete)
-
 
 // // Tempo
 // routes.get('/time/:id', StageController.time)
