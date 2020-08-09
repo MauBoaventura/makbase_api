@@ -73,6 +73,7 @@ name, age, gender, email, whatsapp, city, uf.
 #### Cadastro (POST)
 
 - Cadastra um produto passando todos os dados:
+	store_id, status, name, sku, unit_price, unit_price_discount, description, stock, seo_description, seo_name, category_id, collor_id, size_id
 
 #### Listar um (GET)
 
@@ -84,13 +85,13 @@ name, age, gender, email, whatsapp, city, uf.
 
 #### Apagar (DELETE)
 
-- Apaga do banco de dados as informações de um produto
+- Apaga do banco de dados um produto setando um novo status
 
 #### Modificar (PUT)
 
 - Altera do banco de dados as informações de um produto
 
-	cpf_cnpj, name, lastname, email, age
+	store_id, status, name, sku, unit_price, unit_price_discount, description, stock, seo_description, seo_name, category_id, collor_id, size_id
 
 ### Relatórios
 
