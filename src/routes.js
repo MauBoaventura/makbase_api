@@ -15,8 +15,8 @@ const ProductController = require('./controllers/ProductController')
 routes.get('/', (req, res) => {
     res.send("<h1>API MARKBASE ONLINE</h1>")
 })
-routes.get('/loginCliente', LoginController.loginCliente)
-routes.get('/loginVendedor', LoginController.loginVendedor)
+routes.post('/loginCliente', LoginController.loginCliente)
+routes.post('/loginVendedor', LoginController.loginVendedor)
 routes.get('/logoutVendedor', util.verificacaoJWT, AutenticaController.logout)
 
 // Autenticacao Google
