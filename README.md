@@ -67,6 +67,33 @@ name, age, gender, email, whatsapp, city, uf.
 
 	cpf_cnpj, name, lastname, email, age, password
 
+### Loja
+
+#### Cadastro (POST) - Necessário estar autenticado e com um Token JWT
+
+- Cadastra uma loja passando todos os dados:
+
+	fantasy_name, legal_name, state_registration, cep, logradouro, number, complement
+
+
+#### Listar um (GET)
+
+- Recupera do banco de dados as informações de uma loja
+
+#### Listar todos (GET)
+
+- Recupera do banco de dados as informações de todos vendedor
+
+#### Apagar (DELETE) - Necessário estar autenticado e com um Token JWT
+
+- Apaga do banco de dados as informações de uma loja
+
+#### Modificar (PUT) - Necessário estar autenticado e com um Token JWT
+
+- Altera do banco de dados as informações de uma loja
+
+	fantasy_name, legal_name, state_registration, cep, logradouro, number, complement
+
 
 ### Produto
 
